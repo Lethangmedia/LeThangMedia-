@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>🔥 LeThang Shop - Premium</title>
+  <title>🔥 LeThang Shop - Acc Tích Xanh</title>
   <!-- Import Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -26,12 +26,9 @@
       --danger: #EF4444;
       --dark: #0A0A0F;
       --dark-card: #14141F;
-      --dark-card-hover: #1C1C2E;
       --text-primary: #FFFFFF;
       --text-secondary: #A0A0B0;
-      --glass-bg: rgba(255, 255, 255, 0.05);
       --glass-border: rgba(255, 255, 255, 0.1);
-      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       --radius: 20px;
     }
 
@@ -42,12 +39,10 @@
       min-height: 100vh;
       background-image: 
         radial-gradient(ellipse at 10% 20%, rgba(108, 60, 225, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+        radial-gradient(ellipse at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 50%);
       background-attachment: fixed;
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--dark-card); }
     ::-webkit-scrollbar-thumb { 
@@ -55,7 +50,6 @@
       border-radius: 10px;
     }
 
-    /* === NAVIGATION === */
     .rainbow-nav {
       background: rgba(10, 10, 15, 0.92);
       backdrop-filter: blur(20px);
@@ -81,7 +75,7 @@
       font-weight: 600;
       font-size: 0.75rem;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       border: none;
@@ -104,13 +98,28 @@
     .menu-item:hover::after { width: 60%; }
     .menu-item:hover { color: white; transform: translateY(-2px); }
     .menu-item i { margin-right: 6px; }
-
     .menu-item.active {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       box-shadow: 0 0 30px rgba(108, 60, 225, 0.3);
     }
     .menu-item.active::after { display: none; }
+
+    .admin-badge {
+      background: linear-gradient(135deg, var(--accent), #D97706);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: white;
+      margin-left: 4px;
+      text-transform: uppercase;
+      animation: pulse-badge 2s infinite;
+    }
+    @keyframes pulse-badge {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
 
     .balance-display {
       display: flex;
@@ -122,17 +131,14 @@
       border: 1px solid rgba(245, 158, 11, 0.2);
       margin-left: 10px;
     }
-    .balance-display .coin { font-size: 1.1rem; }
     .balance-amount {
       font-weight: 700;
       color: var(--accent);
       font-size: 0.9rem;
     }
 
-    /* === CONTAINER === */
     .container { max-width: 1400px; margin: 0 auto; padding: 15px; }
 
-    /* === HEADER === */
     .header-cool {
       text-align: center;
       padding: 40px 20px 30px;
@@ -143,35 +149,15 @@
       position: relative;
       overflow: hidden;
     }
-    .header-cool::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 50%, rgba(108, 60, 225, 0.05), transparent 60%);
-      animation: shimmer 8s ease-in-out infinite;
-    }
-    @keyframes shimmer {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(5%, 5%); }
-    }
     .header-cool h1 {
       font-size: 3rem;
       font-weight: 900;
       background: linear-gradient(135deg, #8B5CF6, #EC4899, #F59E0B);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      position: relative;
       letter-spacing: -1px;
     }
-    .header-cool p {
-      margin-top: 8px;
-      opacity: 0.7;
-      font-size: 0.95rem;
-      position: relative;
-    }
+    .header-cool p { margin-top: 8px; opacity: 0.7; font-size: 0.95rem; }
     .header-cool .badge-premium {
       display: inline-block;
       background: linear-gradient(135deg, var(--accent), #D97706);
@@ -185,7 +171,6 @@
       letter-spacing: 1px;
     }
 
-    /* === DASHBOARD === */
     .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -205,10 +190,7 @@
       border-color: var(--primary);
       box-shadow: 0 10px 30px rgba(108, 60, 225, 0.1);
     }
-    .stat-card .icon {
-      font-size: 1.5rem;
-      margin-bottom: 4px;
-    }
+    .stat-card .icon { font-size: 1.5rem; margin-bottom: 4px; }
     .stat-card h3 {
       font-size: 1.5rem;
       font-weight: 700;
@@ -216,14 +198,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .stat-card p {
-      font-size: 0.7rem;
-      opacity: 0.6;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+    .stat-card p { font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.5px; }
 
-    /* === CATEGORY TABS === */
     .category-tabs {
       display: flex;
       gap: 12px;
@@ -244,18 +220,13 @@
       align-items: center;
       gap: 8px;
     }
-    .category-tab:hover {
-      border-color: var(--primary-light);
-      color: white;
-      transform: scale(1.02);
-    }
+    .category-tab:hover { border-color: var(--primary-light); color: white; transform: scale(1.02); }
     .category-tab.active-tab {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-color: transparent;
       color: white;
       box-shadow: 0 0 30px rgba(108, 60, 225, 0.3);
     }
-    .category-tab i { font-size: 1rem; }
 
     .category-content { display: none; }
     .category-content.active-content { display: block; animation: fadeUp 0.4s ease; }
@@ -277,10 +248,9 @@
       background: linear-gradient(90deg, var(--primary), transparent);
     }
 
-    /* === PRODUCTS GRID === */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
@@ -295,18 +265,6 @@
       position: relative;
       overflow: hidden;
     }
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(108, 60, 225, 0.05), rgba(236, 72, 153, 0.03));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .product-card:hover::before { opacity: 1; }
     .product-card:hover {
       transform: translateY(-8px) scale(1.01);
       border-color: var(--primary);
@@ -319,21 +277,16 @@
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
       margin-bottom: 10px;
     }
     .badge-dame { background: linear-gradient(135deg, #EF4444, #DC2626); color: white; }
     .badge-tich { background: linear-gradient(135deg, #10B981, #059669); color: white; }
-    .product-card .product-icon {
-      font-size: 2.5rem;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .product-card h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+    .badge-fb { background: linear-gradient(135deg, #1877F2, #0D65D9); color: white; }
+    .badge-ig { background: linear-gradient(135deg, #E4405F, #C13584); color: white; }
+    
+    .product-card .product-icon { font-size: 2.5rem; margin-bottom: 8px; display: block; }
+    .product-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+    .product-card .platform { font-size: 0.7rem; opacity: 0.6; margin-bottom: 6px; }
     .product-card .price {
       color: var(--accent);
       font-weight: 700;
@@ -347,8 +300,17 @@
       transition: opacity 0.3s ease;
     }
     .product-card:hover .buy-hint { opacity: 0.8; }
+    .product-card .login-info {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 0.8rem;
+      text-align: left;
+    }
+    .product-card .login-info span { display: block; padding: 2px 0; }
+    .product-card .login-info .label { opacity: 0.5; font-size: 0.65rem; text-transform: uppercase; }
 
-    /* === PURCHASE HISTORY === */
     .purchase-history {
       margin-top: 35px;
       background: var(--dark-card);
@@ -375,16 +337,9 @@
       align-items: center;
       border-left: 3px solid var(--primary);
     }
-    .history-item .time {
-      font-size: 0.65rem;
-      opacity: 0.4;
-    }
-    .history-item .amount {
-      color: var(--danger);
-      font-weight: 600;
-    }
+    .history-item .time { font-size: 0.65rem; opacity: 0.4; }
+    .history-item .amount { color: var(--danger); font-weight: 600; }
 
-    /* === SUPPORT === */
     .support-section {
       display: flex;
       justify-content: center;
@@ -405,14 +360,11 @@
       font-size: 0.9rem;
       border: none;
     }
-    .support-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    }
+    .support-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
     .btn-zalo { background: linear-gradient(135deg, #0068FF, #0052CC); }
     .btn-telegram { background: linear-gradient(135deg, #0088CC, #006699); }
 
-    /* === MODAL === */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -432,7 +384,7 @@
       animation: modalIn 0.35s ease;
       max-height: 92vh;
       overflow-y: auto;
-      box-shadow: var(--shadow);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
     @keyframes modalIn {
       from { opacity: 0; transform: scale(0.92) translateY(30px); }
@@ -465,11 +417,7 @@
       border: none;
       background: rgba(255,255,255,0.05);
     }
-    .close-modal-btn:hover {
-      background: var(--danger);
-      color: white;
-      transform: rotate(90deg);
-    }
+    .close-modal-btn:hover { background: var(--danger); color: white; transform: rotate(90deg); }
     .modal-body { padding: 24px; }
 
     input, select {
@@ -593,15 +541,6 @@
       margin-top: 12px;
       color: var(--text-secondary);
     }
-    .search-user-result {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-      padding: 8px 12px;
-      margin-bottom: 10px;
-      font-size: 0.82rem;
-    }
-    .search-user-result .found { color: var(--success); }
-    .search-user-result .not-found { color: var(--danger); }
 
     .empty-products {
       text-align: center;
@@ -618,30 +557,60 @@
       border-radius: 16px;
       margin-bottom: 16px;
     }
-    .user-panel-info .avatar {
-      font-size: 2.5rem;
-      color: var(--primary-light);
-    }
-    .user-panel-info .name {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-top: 4px;
-    }
-    .user-panel-info .balance {
-      color: var(--accent);
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
+    .user-panel-info .avatar { font-size: 2.5rem; color: var(--primary-light); }
+    .user-panel-info .name { font-weight: 700; font-size: 1.1rem; margin-top: 4px; }
+    .user-panel-info .balance { color: var(--accent); font-size: 1.2rem; font-weight: 700; }
 
-    /* Responsive */
+    .admin-only { display: none; }
+    .admin-only.visible { display: block; }
+
+    /* Account detail popup */
+    .account-detail {
+      background: rgba(0,0,0,0.4);
+      border-radius: 14px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+    .account-detail .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .account-detail .row:last-child { border-bottom: none; }
+    .account-detail .label { opacity: 0.5; font-size: 0.75rem; }
+    .account-detail .value { font-weight: 600; font-family: monospace; }
+
+    .platform-selector {
+      display: flex;
+      gap: 12px;
+      margin: 10px 0;
+    }
+    .platform-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 2px solid var(--glass-border);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    .platform-btn:hover { border-color: var(--primary-light); color: white; }
+    .platform-btn.active-platform {
+      border-color: var(--primary);
+      background: rgba(108, 60, 225, 0.15);
+      color: white;
+    }
+    .platform-btn i { margin-right: 6px; }
+
     @media (max-width: 768px) {
       .header-cool h1 { font-size: 2rem; }
-      .rainbow-menu { gap: 4px; }
       .menu-item { font-size: 0.6rem; padding: 6px 12px; }
-      .products-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
       .category-tab { font-size: 0.7rem; padding: 8px 16px; }
       .dashboard { grid-template-columns: repeat(2, 1fr); }
-      .balance-display { padding: 4px 12px; margin-left: 4px; }
       .balance-amount { font-size: 0.7rem; }
     }
     @media (max-width: 480px) {
@@ -673,14 +642,12 @@
 </nav>
 
 <div class="container">
-  <!-- HEADER -->
   <div class="header-cool">
     <h1>✨ LeThang Shop</h1>
-    <p><i class="fas fa-crown" style="color: var(--accent);"></i> Dịch vụ chất lượng cao - Mua sắm an toàn</p>
+    <p><i class="fas fa-crown" style="color: var(--accent);"></i> Mua acc tích xanh - Nhận thông tin đăng nhập ngay</p>
     <span class="badge-premium"><i class="fas fa-star"></i> PREMIUM</span>
   </div>
 
-  <!-- DASHBOARD -->
   <div class="dashboard">
     <div class="stat-card"><div class="icon">📦</div><h3 id="total-products">0</h3><p>Tổng sản phẩm</p></div>
     <div class="stat-card"><div class="icon">💎</div><h3 id="dame-fb">0</h3><p>Dame FB</p></div>
@@ -688,7 +655,6 @@
     <div class="stat-card"><div class="icon">🪙</div><h3 id="balance-stat">0</h3><p>Số dư của bạn</p></div>
   </div>
 
-  <!-- CATEGORY TABS -->
   <div class="category-tabs">
     <button class="category-tab active-tab" onclick="showCategory('dame')">
       <i class="fas fa-crown" style="color: #EF4444;"></i> Dame Facebook
@@ -698,7 +664,6 @@
     </button>
   </div>
 
-  <!-- DAME -->
   <div id="category-dame" class="category-content active-content">
     <div class="category-title">
       <span>💎 Dame Facebook</span>
@@ -707,7 +672,6 @@
     <div class="products-grid" id="dame-products"></div>
   </div>
 
-  <!-- TÍCH XANH -->
   <div id="category-tich" class="category-content">
     <div class="category-title">
       <span>✅ Acc Tích Xanh</span>
@@ -716,13 +680,11 @@
     <div class="products-grid" id="tich-products"></div>
   </div>
 
-  <!-- PURCHASE HISTORY -->
   <div class="purchase-history" id="purchase-history" style="display: none;">
     <h3><i class="fas fa-clock" style="color: var(--primary-light);"></i> Lịch sử giao dịch</h3>
     <div id="history-list"></div>
   </div>
 
-  <!-- SUPPORT -->
   <div class="support-section">
     <a href="https://zalo.me/0356306747" target="_blank" class="support-btn btn-zalo"><i class="fab fa-zalo"></i> Zalo</a>
     <a href="https://t.me/lethangzz" target="_blank" class="support-btn btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
@@ -737,7 +699,6 @@
       <div class="close-modal-btn" id="close-modal-btn">✕</div>
     </div>
     <div class="modal-body">
-      <!-- Auth Forms -->
       <div id="auth-forms">
         <div class="auth-switch">
           <button class="toggle-auth active-toggle" id="switch-to-login">🔐 Đăng nhập</button>
@@ -763,7 +724,6 @@
         <p id="auth-msg" class="info-text"></p>
       </div>
 
-      <!-- User Panel -->
       <div id="user-panel" class="hidden">
         <div class="user-panel-info">
           <div class="avatar"><i class="fas fa-user-circle"></i></div>
@@ -771,7 +731,7 @@
           <div class="balance">💰 <span id="user-balance-display">0</span> VNĐ</div>
         </div>
 
-        <div id="admin-only-section" class="hidden">
+        <div id="admin-only-section" class="admin-only">
           <div class="admin-section">
             <h3><i class="fas fa-plus-circle" style="color: var(--success);"></i> Thêm sản phẩm</h3>
             <select id="product-category">
@@ -780,14 +740,15 @@
             </select>
             <input type="text" id="product-name" placeholder="Tên sản phẩm">
             <input type="number" id="product-price" placeholder="Giá VNĐ">
+            <div id="account-fields" style="display:none;">
+              <input type="text" id="acc-username" placeholder="Tên đăng nhập">
+              <input type="text" id="acc-password" placeholder="Mật khẩu">
+              <select id="acc-platform">
+                <option value="facebook">📘 Facebook</option>
+                <option value="instagram">📸 Instagram</option>
+              </select>
+            </div>
             <button class="btn-primary" id="add-product-btn">Thêm sản phẩm</button>
-          </div>
-          <div class="admin-section">
-            <h3><i class="fas fa-coins" style="color: var(--accent);"></i> Nạp tiền</h3>
-            <input type="text" id="target-user-name" placeholder="👤 Tên user">
-            <input type="number" id="money-amount" placeholder="💰 Số tiền">
-            <div id="user-search-result" class="search-user-result" style="display:none;"></div>
-            <button class="btn-primary" id="add-money-btn">Cộng tiền</button>
           </div>
           <div class="admin-section">
             <h3><i class="fas fa-users" style="color: var(--primary-light);"></i> Danh sách user</h3>
@@ -795,7 +756,7 @@
           </div>
         </div>
 
-        <div id="user-only-info" class="info-text hidden">
+        <div id="user-only-info" class="info-text">
           <i class="fas fa-user"></i> Bạn đang ở chế độ người dùng
         </div>
 
@@ -826,14 +787,17 @@
     firebaseReady = true;
   } catch (error) {
     console.error('Lỗi Firebase:', error);
-    document.getElementById('dame-products').innerHTML = `
-      <div style="grid-column:1/-1; text-align:center; padding:40px; color:#EF4444;">
-        <i class="fas fa-exclamation-triangle" style="font-size:3rem;"></i>
-        <h3>Không thể kết nối</h3>
-        <button onclick="location.reload()" style="margin-top:12px; padding:10px 30px; border-radius:40px; background:#EF4444; border:none; color:white; cursor:pointer;">Thử lại</button>
-      </div>
-    `;
   }
+
+  // Hiện/ẩn fields acc khi chọn category
+  document.getElementById('product-category').addEventListener('change', function() {
+    const fields = document.getElementById('account-fields');
+    if (this.value === 'tich') {
+      fields.style.display = 'block';
+    } else {
+      fields.style.display = 'none';
+    }
+  });
 
   function showComingSoon() {
     Swal.fire({
@@ -852,7 +816,6 @@
     const tabs = document.querySelectorAll('.category-tab');
     if (category === 'dame') tabs[0].classList.add('active-tab');
     else tabs[1].classList.add('active-tab');
-    // Cập nhật menu item
     document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
     const menuItems = document.querySelectorAll('.menu-item');
     if (category === 'dame') menuItems[0].classList.add('active');
@@ -867,7 +830,6 @@
   closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
-  // Auth switch
   const switchLogin = document.getElementById('switch-to-login');
   const switchRegister = document.getElementById('switch-to-register');
   const loginForm = document.getElementById('login-form');
@@ -940,30 +902,49 @@
     auth.onAuthStateChanged(async (user) => {
       const authForms = document.getElementById('auth-forms');
       const userPanel = document.getElementById('user-panel');
+      const adminSection = document.getElementById('admin-only-section');
+      const userOnlyInfo = document.getElementById('user-only-info');
+      
       if (user) {
         try {
           const doc = await db.collection('users').doc(user.uid).get();
           if (doc.exists) {
             const data = doc.data();
             const isAdmin = data.email === ADMIN_EMAIL;
+            
             document.getElementById('user-name-display').textContent = data.name || user.email;
             document.getElementById('user-balance-display').textContent = (data.balance || 0).toLocaleString('vi-VN');
             document.getElementById('top-balance').textContent = (data.balance || 0).toLocaleString('vi-VN') + ' VNĐ';
             document.getElementById('balance-stat').textContent = (data.balance || 0).toLocaleString('vi-VN') + ' VNĐ';
 
             if (isAdmin) {
-              document.getElementById('admin-only-section').classList.remove('hidden');
-              document.getElementById('user-only-info').classList.add('hidden');
+              adminSection.classList.add('visible');
+              adminSection.classList.remove('hidden');
+              userOnlyInfo.classList.add('hidden');
               loadUsers();
+              const loginBtn = document.getElementById('login-menu-btn');
+              if (!loginBtn.querySelector('.admin-badge')) {
+                loginBtn.innerHTML += ' <span class="admin-badge">👑 Admin</span>';
+              }
             } else {
-              document.getElementById('admin-only-section').classList.add('hidden');
-              document.getElementById('user-only-info').classList.remove('hidden');
+              adminSection.classList.remove('visible');
+              adminSection.classList.add('hidden');
+              userOnlyInfo.classList.remove('hidden');
+              const badge = document.querySelector('.admin-badge');
+              if (badge) badge.remove();
             }
+            
             authForms.classList.add('hidden');
             userPanel.classList.remove('hidden');
             loadPurchaseHistory(user.uid);
             document.getElementById('purchase-history').style.display = 'block';
-            document.getElementById('login-menu-btn').innerHTML = `<i class="fas fa-user"></i> ${data.name || user.email}`;
+            
+            const nameDisplay = data.name || user.email;
+            const loginBtn = document.getElementById('login-menu-btn');
+            loginBtn.innerHTML = `<i class="fas fa-user"></i> ${nameDisplay}`;
+            if (isAdmin) {
+              loginBtn.innerHTML += ' <span class="admin-badge">👑 Admin</span>';
+            }
           }
         } catch (err) { console.error(err); }
       } else {
@@ -973,6 +954,8 @@
         document.getElementById('balance-stat').textContent = '0 VNĐ';
         document.getElementById('purchase-history').style.display = 'none';
         document.getElementById('login-menu-btn').innerHTML = '<i class="fas fa-user"></i> ĐĂNG NHẬP';
+        const badge = document.querySelector('.admin-badge');
+        if (badge) badge.remove();
       }
     });
 
@@ -991,9 +974,10 @@
         snap.forEach(doc => {
           const item = doc.data();
           const date = item.createdAt ? new Date(item.createdAt.toDate()).toLocaleString('vi-VN') : 'Vừa xong';
+          const platformIcon = item.platform === 'facebook' ? '📘' : '📸';
           list.innerHTML += `
             <div class="history-item">
-              <span><i class="fas fa-shopping-cart"></i> ${item.productName}</span>
+              <span><i class="fas fa-shopping-cart"></i> ${item.productName} ${platformIcon}</span>
               <span class="amount">-${item.price.toLocaleString('vi-VN')} VNĐ</span>
               <span class="time">${date}</span>
             </div>
@@ -1016,71 +1000,50 @@
       } catch (err) { console.error(err); }
     }
 
-    // Search user by name
-    document.getElementById('target-user-name').addEventListener('input', async function() {
-      const name = this.value.trim();
-      const result = document.getElementById('user-search-result');
-      if (!name || name.length < 2) { result.style.display = 'none'; return; }
-      try {
-        const snap = await db.collection('users').where('name', '==', name).get();
-        if (!snap.empty) {
-          const u = snap.docs[0].data();
-          result.style.display = 'block';
-          result.innerHTML = `<span class="found">✅ Tìm thấy: <strong>${u.name}</strong> (${u.email}) - Số dư: ${(u.balance||0).toLocaleString('vi-VN')} VNĐ</span>`;
-        } else {
-          result.style.display = 'block';
-          result.innerHTML = `<span class="not-found">❌ Không tìm thấy "<strong>${name}</strong>"</span>`;
-        }
-      } catch (err) { console.error(err); }
-    });
-
-    // Add product
+    // Add product (admin)
     document.getElementById('add-product-btn').addEventListener('click', async () => {
       const category = document.getElementById('product-category').value;
       const name = document.getElementById('product-name').value.trim();
       const price = parseInt(document.getElementById('product-price').value);
-      if (!name || !price || isNaN(price)) { alert('Nhập đầy đủ thông tin!'); return; }
-      try {
-        await db.collection('products').add({ name, price, category, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-        alert('✅ Thêm sản phẩm thành công!');
-        document.getElementById('product-name').value = '';
-        document.getElementById('product-price').value = '';
-        loadProducts();
-      } catch (err) { alert('❌ Lỗi: ' + err.message); }
-    });
-
-    // Add money by name
-    document.getElementById('add-money-btn').addEventListener('click', async () => {
-      const name = document.getElementById('target-user-name').value.trim();
-      const amount = parseInt(document.getElementById('money-amount').value);
-      const result = document.getElementById('user-search-result');
-      if (!name || !amount || isNaN(amount)) { alert('Nhập đầy đủ thông tin!'); return; }
-      try {
-        const q = await db.collection('users').where('name', '==', name).get();
-        if (q.empty) {
-          result.style.display = 'block';
-          result.innerHTML = `<span class="not-found">❌ Không tìm thấy user "<strong>${name}</strong>"</span>`;
+      
+      if (!name || !price || isNaN(price)) { 
+        alert('Nhập đầy đủ tên và giá sản phẩm!'); 
+        return; 
+      }
+      
+      let productData = { name, price, category, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+      
+      // Nếu là acc tích xanh, lưu thêm thông tin đăng nhập
+      if (category === 'tich') {
+        const username = document.getElementById('acc-username').value.trim();
+        const password = document.getElementById('acc-password').value.trim();
+        const platform = document.getElementById('acc-platform').value;
+        
+        if (!username || !password) {
+          alert('Nhập đầy đủ tên đăng nhập và mật khẩu!');
           return;
         }
-        const doc = q.docs[0];
-        const data = doc.data();
-        const newBalance = (data.balance || 0) + amount;
-        await db.collection('users').doc(doc.id).update({ balance: newBalance });
-        result.style.display = 'block';
-        result.innerHTML = `<span class="found">✅ Đã cộng ${amount.toLocaleString('vi-VN')} VNĐ cho <strong>${data.name}</strong></span>`;
-        alert(`✅ Đã cộng ${amount.toLocaleString('vi-VN')} VNĐ cho ${data.name}`);
-        document.getElementById('target-user-name').value = '';
-        document.getElementById('money-amount').value = '';
-        loadUsers();
-        if (auth.currentUser && auth.currentUser.email === data.email) {
-          document.getElementById('top-balance').textContent = newBalance.toLocaleString('vi-VN') + ' VNĐ';
-          document.getElementById('balance-stat').textContent = newBalance.toLocaleString('vi-VN') + ' VNĐ';
-          document.getElementById('user-balance-display').textContent = newBalance.toLocaleString('vi-VN');
-        }
-      } catch (err) { alert('❌ Lỗi: ' + err.message); }
+        
+        productData.username = username;
+        productData.password = password;
+        productData.platform = platform;
+        productData.isSold = false;
+      }
+      
+      try {
+        await db.collection('products').add(productData);
+        Swal.fire({ icon: 'success', title: '✅ Thêm thành công!', text: `Đã thêm ${name}`, timer: 1500, showConfirmButton: false });
+        document.getElementById('product-name').value = '';
+        document.getElementById('product-price').value = '';
+        document.getElementById('acc-username').value = '';
+        document.getElementById('acc-password').value = '';
+        loadProducts();
+      } catch (err) { 
+        alert('❌ Lỗi: ' + err.message); 
+      }
     });
 
-    // Buy product
+    // Buy product - hiển thị thông tin acc
     async function buyProduct(product) {
       const user = auth.currentUser;
       if (!user) {
@@ -1088,10 +1051,12 @@
         modal.style.display = 'flex';
         return;
       }
+      
       try {
         const doc = await db.collection('users').doc(user.uid).get();
         const data = doc.data();
         const balance = data.balance || 0;
+        
         if (balance < product.price) {
           Swal.fire({
             icon: 'error', title: 'Số dư không đủ!',
@@ -1100,30 +1065,99 @@
           });
           return;
         }
-        const confirm = await Swal.fire({
-          title: 'Xác nhận mua',
-          html: `Bạn muốn mua <strong>${product.name}</strong><br>Giá: <strong style="color:#F59E0B">${product.price.toLocaleString('vi-VN')} VNĐ</strong>?`,
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#10B981',
-          cancelButtonColor: '#EF4444',
-          confirmButtonText: '✅ Mua',
-          cancelButtonText: '❌ Hủy'
-        });
-        if (!confirm.isConfirmed) return;
+        
+        // Nếu là acc tích xanh, hiển thị thông tin đăng nhập trước khi mua
+        if (product.category === 'tich' && product.username && product.password) {
+          const platformName = product.platform === 'facebook' ? '📘 Facebook' : '📸 Instagram';
+          const confirm = await Swal.fire({
+            title: '📋 Thông tin tài khoản',
+            html: `
+              <div style="text-align:left; background:rgba(0,0,0,0.3); border-radius:12px; padding:15px; margin:10px 0;">
+                <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+                  <span style="opacity:0.5;">Nền tảng</span>
+                  <span><strong>${platformName}</strong></span>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+                  <span style="opacity:0.5;">Tên đăng nhập</span>
+                  <span><strong style="color:#10B981;">${product.username}</strong></span>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:4px 0;">
+                  <span style="opacity:0.5;">Mật khẩu</span>
+                  <span><strong style="color:#F59E0B;">${product.password}</strong></span>
+                </div>
+              </div>
+              <p style="font-size:0.85rem; color:var(--text-secondary);">
+                <i class="fas fa-info-circle"></i> Bạn có chắc muốn mua acc này với giá 
+                <strong style="color:#F59E0B;">${product.price.toLocaleString('vi-VN')} VNĐ</strong>?
+              </p>
+            `,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#10B981',
+            cancelButtonColor: '#EF4444',
+            confirmButtonText: '✅ Mua ngay',
+            cancelButtonText: '❌ Hủy',
+            width: 500
+          });
+          if (!confirm.isConfirmed) return;
+        } else {
+          // Sản phẩm dame - xác nhận bình thường
+          const confirm = await Swal.fire({
+            title: 'Xác nhận mua',
+            html: `Bạn muốn mua <strong>${product.name}</strong><br>Giá: <strong style="color:#F59E0B">${product.price.toLocaleString('vi-VN')} VNĐ</strong>?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#10B981',
+            cancelButtonColor: '#EF4444',
+            confirmButtonText: '✅ Mua',
+            cancelButtonText: '❌ Hủy'
+          });
+          if (!confirm.isConfirmed) return;
+        }
+        
+        // Trừ tiền
         const newBalance = balance - product.price;
         await db.collection('users').doc(user.uid).update({ balance: newBalance });
+        
+        // Lưu lịch sử mua hàng
         await db.collection('purchases').add({
-          userId: user.uid, userEmail: user.email,
-          productName: product.name, price: product.price,
+          userId: user.uid, 
+          userEmail: user.email,
+          productName: product.name, 
+          price: product.price,
           category: product.category,
+          platform: product.platform || 'none',
+          username: product.username || '',
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
+        
+        // Nếu là acc tích xanh, đánh dấu đã bán và xóa khỏi shop
+        if (product.category === 'tich' && product.docId) {
+          await db.collection('products').doc(product.docId).update({ isSold: true });
+          // Xóa luôn khỏi danh sách hiển thị
+          await db.collection('products').doc(product.docId).delete();
+        }
+        
+        // Cập nhật UI
         document.getElementById('top-balance').textContent = newBalance.toLocaleString('vi-VN') + ' VNĐ';
         document.getElementById('balance-stat').textContent = newBalance.toLocaleString('vi-VN') + ' VNĐ';
         document.getElementById('user-balance-display').textContent = newBalance.toLocaleString('vi-VN');
+        
         loadPurchaseHistory(user.uid);
-        Swal.fire({ icon: 'success', title: '🎉 Mua thành công!', text: `Đã mua ${product.name}`, timer: 1500, showConfirmButton: false });
+        loadProducts();
+        
+        // Hiển thị thông báo thành công
+        let msg = `Đã mua ${product.name}`;
+        if (product.username && product.password) {
+          msg += `\n👤 ${product.username}\n🔑 ${product.password}`;
+        }
+        Swal.fire({ 
+          icon: 'success', 
+          title: '🎉 Mua thành công!', 
+          text: msg,
+          timer: 3000,
+          showConfirmButton: true
+        });
       } catch (err) {
         Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Thử lại sau', confirmButtonColor: '#EF4444' });
         console.error(err);
@@ -1147,8 +1181,12 @@
         }
 
         let total = 0, dameCount = 0, tichCount = 0;
+        
         snap.forEach(doc => {
           const data = doc.data();
+          // Bỏ qua acc đã bán
+          if (data.isSold === true) return;
+          
           total++;
           const isDame = data.category === 'dame' || data.name.toLowerCase().includes('dame');
           if (isDame) dameCount++;
@@ -1156,29 +1194,79 @@
 
           const card = document.createElement('div');
           card.className = 'product-card';
-          const badge = isDame ? 'badge-dame' : 'badge-tich';
-          const badgeText = isDame ? '💎 Dame' : '✅ Tích Xanh';
+          
+          let badgeHtml = '';
+          let iconHtml = '';
+          let platformHtml = '';
+          let loginInfoHtml = '';
+          
+          if (isDame) {
+            badgeHtml = '<span class="category-badge badge-dame">💎 Dame</span>';
+            iconHtml = '👑';
+          } else {
+            badgeHtml = '<span class="category-badge badge-tich">✅ Tích Xanh</span>';
+            iconHtml = '⭐';
+            
+            // Hiển thị nền tảng
+            const platformName = data.platform === 'facebook' ? '📘 Facebook' : '📸 Instagram';
+            const platformClass = data.platform === 'facebook' ? 'badge-fb' : 'badge-ig';
+            platformHtml = `<div class="platform"><span class="category-badge ${platformClass}">${platformName}</span></div>`;
+            
+            // Hiển thị thông tin đăng nhập (ẩn 1 phần)
+            if (data.username) {
+              loginInfoHtml = `
+                <div class="login-info">
+                  <span class="label">👤 Tên đăng nhập</span>
+                  <span>${data.username}</span>
+                  <span class="label" style="margin-top:4px;">🔒 Mật khẩu</span>
+                  <span>••••••••</span>
+                  <span style="font-size:0.6rem; opacity:0.4; margin-top:4px; display:block;">
+                    <i class="fas fa-info-circle"></i> Nhấn để xem đầy đủ
+                  </span>
+                </div>
+              `;
+            }
+          }
+          
           card.innerHTML = `
-            <span class="category-badge ${badge}">${badgeText}</span>
-            <span class="product-icon">${isDame ? '👑' : '⭐'}</span>
+            ${badgeHtml}
+            <span class="product-icon">${iconHtml}</span>
             <h3>${data.name}</h3>
+            ${platformHtml}
+            ${loginInfoHtml}
             <span class="price">${data.price.toLocaleString('vi-VN')} VNĐ</span>
             <div class="buy-hint"><i class="fas fa-tap"></i> Nhấn để mua</div>
           `;
-          card.onclick = () => buyProduct({ name: data.name, price: data.price, category: data.category || (isDame ? 'dame' : 'tich') });
+          
+          // Lưu docId để xóa sau khi mua
+          const productData = { 
+            name: data.name, 
+            price: data.price, 
+            category: data.category || (isDame ? 'dame' : 'tich'),
+            docId: doc.id,
+            username: data.username || '',
+            password: data.password || '',
+            platform: data.platform || 'facebook'
+          };
+          
+          card.onclick = () => buyProduct(productData);
+          
           if (isDame) dameContainer.appendChild(card);
           else tichContainer.appendChild(card);
         });
 
-        if (!dameContainer.children.length) dameContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm Dame</p></div>';
-        if (!tichContainer.children.length) tichContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm Tích Xanh</p></div>';
+        if (!dameContainer.children.length) {
+          dameContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm Dame</p></div>';
+        }
+        if (!tichContainer.children.length) {
+          tichContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm Tích Xanh</p></div>';
+        }
 
         document.getElementById('total-products').textContent = total;
         document.getElementById('dame-fb').textContent = dameCount;
         document.getElementById('tich-xanh').textContent = tichCount;
       } catch (err) {
         console.error('Lỗi load sản phẩm:', err);
-        document.getElementById('dame-products').innerHTML = '<div class="empty-products" style="color:#EF4444;"><i class="fas fa-exclamation-circle"></i><p>Lỗi tải sản phẩm</p></div>';
       }
     }
 
