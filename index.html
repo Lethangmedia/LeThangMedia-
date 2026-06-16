@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>🔥 LeThang Shop - Acc Tích Xanh</title>
+  <title>🔥 LeThang Shop - Premium</title>
   <!-- Import Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -283,10 +283,11 @@
     .badge-tich { background: linear-gradient(135deg, #10B981, #059669); color: white; }
     .badge-fb { background: linear-gradient(135deg, #1877F2, #0D65D9); color: white; }
     .badge-ig { background: linear-gradient(135deg, #E4405F, #C13584); color: white; }
+    .badge-sd { background: linear-gradient(135deg, #8B5CF6, #6C3CE1); color: white; }
     
     .product-card .product-icon { font-size: 2.5rem; margin-bottom: 8px; display: block; }
     .product-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
-    .product-card .platform { font-size: 0.7rem; opacity: 0.6; margin-bottom: 6px; }
+    .product-card .platform { font-size: 0.7rem; margin-bottom: 6px; }
     .product-card .price {
       color: var(--accent);
       font-weight: 700;
@@ -308,8 +309,15 @@
       font-size: 0.8rem;
       text-align: left;
     }
-    .product-card .login-info span { display: block; padding: 2px 0; }
+    .product-card .login-info .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .product-card .login-info .row:last-child { border-bottom: none; }
     .product-card .login-info .label { opacity: 0.5; font-size: 0.65rem; text-transform: uppercase; }
+    .product-card .login-info .value { font-weight: 600; font-family: monospace; }
 
     .purchase-history {
       margin-top: 35px;
@@ -379,7 +387,7 @@
       background: var(--dark-card);
       border-radius: 28px;
       width: 92%;
-      max-width: 500px;
+      max-width: 520px;
       border: 1px solid var(--glass-border);
       animation: modalIn 0.35s ease;
       max-height: 92vh;
@@ -564,7 +572,6 @@
     .admin-only { display: none; }
     .admin-only.visible { display: block; }
 
-    /* Account detail popup */
     .account-detail {
       background: rgba(0,0,0,0.4);
       border-radius: 14px;
@@ -574,12 +581,14 @@
     .account-detail .row {
       display: flex;
       justify-content: space-between;
-      padding: 6px 0;
+      padding: 8px 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .account-detail .row:last-child { border-bottom: none; }
-    .account-detail .label { opacity: 0.5; font-size: 0.75rem; }
+    .account-detail .label { opacity: 0.5; font-size: 0.75rem; text-transform: uppercase; }
     .account-detail .value { font-weight: 600; font-family: monospace; }
+    .account-detail .value.username { color: #10B981; }
+    .account-detail .value.password { color: #F59E0B; }
 
     .platform-selector {
       display: flex;
@@ -605,6 +614,26 @@
     }
     .platform-btn i { margin-right: 6px; }
 
+    /* SweetAlert custom */
+    .swal2-popup {
+      background: var(--dark-card) !important;
+      border: 1px solid var(--glass-border) !important;
+      border-radius: 20px !important;
+    }
+    .swal2-title, .swal2-html-container {
+      color: var(--text-primary) !important;
+    }
+
+    .search-user-result {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 0.82rem;
+    }
+    .search-user-result .found { color: var(--success); }
+    .search-user-result .not-found { color: var(--danger); }
+
     @media (max-width: 768px) {
       .header-cool h1 { font-size: 2rem; }
       .menu-item { font-size: 0.6rem; padding: 6px 12px; }
@@ -628,6 +657,7 @@
   <div class="rainbow-menu">
     <button class="menu-item active" onclick="showCategory('dame')"><i class="fas fa-crown"></i> DAME</button>
     <button class="menu-item" onclick="showCategory('tich')"><i class="fas fa-check-circle"></i> TÍCH XANH</button>
+    <button class="menu-item" onclick="showCategory('su-dung')"><i class="fas fa-tools"></i> SÀI ĐƯỢC</button>
     <button class="menu-item" onclick="showComingSoon()"><i class="fas fa-plus-circle"></i> THÊM</button>
     <button class="menu-item" onclick="showComingSoon()"><i class="fas fa-folder"></i> MỤC</button>
     <button class="menu-item" onclick="showComingSoon()"><i class="fas fa-coins"></i> NHẬP</button>
@@ -662,6 +692,9 @@
     <button class="category-tab" onclick="showCategory('tich')">
       <i class="fas fa-check-circle" style="color: #10B981;"></i> Acc Tích Xanh
     </button>
+    <button class="category-tab" onclick="showCategory('su-dung')">
+      <i class="fas fa-tools" style="color: #8B5CF6;"></i> Sài Được
+    </button>
   </div>
 
   <div id="category-dame" class="category-content active-content">
@@ -678,6 +711,14 @@
       <span class="line"></span>
     </div>
     <div class="products-grid" id="tich-products"></div>
+  </div>
+
+  <div id="category-su-dung" class="category-content">
+    <div class="category-title">
+      <span>🛠️ Sài Được</span>
+      <span class="line"></span>
+    </div>
+    <div class="products-grid" id="sudung-products"></div>
   </div>
 
   <div class="purchase-history" id="purchase-history" style="display: none;">
@@ -731,12 +772,14 @@
           <div class="balance">💰 <span id="user-balance-display">0</span> VNĐ</div>
         </div>
 
+        <!-- ADMIN ONLY -->
         <div id="admin-only-section" class="admin-only">
           <div class="admin-section">
             <h3><i class="fas fa-plus-circle" style="color: var(--success);"></i> Thêm sản phẩm</h3>
             <select id="product-category">
               <option value="dame">💎 Dame Facebook</option>
               <option value="tich">✅ Acc Tích Xanh</option>
+              <option value="su-dung">🛠️ Sài Được</option>
             </select>
             <input type="text" id="product-name" placeholder="Tên sản phẩm">
             <input type="number" id="product-price" placeholder="Giá VNĐ">
@@ -750,6 +793,15 @@
             </div>
             <button class="btn-primary" id="add-product-btn">Thêm sản phẩm</button>
           </div>
+
+          <div class="admin-section">
+            <h3><i class="fas fa-coins" style="color: var(--accent);"></i> + Tiền cho user</h3>
+            <input type="text" id="target-user-name" placeholder="👤 Tên user cần + tiền">
+            <input type="number" id="money-amount" placeholder="💰 Số tiền VNĐ">
+            <div id="user-search-result" class="search-user-result" style="display:none;"></div>
+            <button class="btn-primary" id="add-money-btn"><i class="fas fa-plus-circle"></i> + Tiền</button>
+          </div>
+
           <div class="admin-section">
             <h3><i class="fas fa-users" style="color: var(--primary-light);"></i> Danh sách user</h3>
             <div id="user-list" class="user-list-box">Đang tải...</div>
@@ -814,12 +866,12 @@
     document.getElementById('category-' + category).classList.add('active-content');
     document.querySelectorAll('.category-tab').forEach(el => el.classList.remove('active-tab'));
     const tabs = document.querySelectorAll('.category-tab');
-    if (category === 'dame') tabs[0].classList.add('active-tab');
-    else tabs[1].classList.add('active-tab');
+    const map = { 'dame': 0, 'tich': 1, 'su-dung': 2 };
+    if (map[category] !== undefined) tabs[map[category]].classList.add('active-tab');
     document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
     const menuItems = document.querySelectorAll('.menu-item');
-    if (category === 'dame') menuItems[0].classList.add('active');
-    else menuItems[1].classList.add('active');
+    const menuMap = { 'dame': 0, 'tich': 1, 'su-dung': 2 };
+    if (menuMap[category] !== undefined) menuItems[menuMap[category]].classList.add('active');
   }
 
   // DOM
@@ -974,7 +1026,7 @@
         snap.forEach(doc => {
           const item = doc.data();
           const date = item.createdAt ? new Date(item.createdAt.toDate()).toLocaleString('vi-VN') : 'Vừa xong';
-          const platformIcon = item.platform === 'facebook' ? '📘' : '📸';
+          const platformIcon = item.platform === 'facebook' ? '📘' : item.platform === 'instagram' ? '📸' : '🛠️';
           list.innerHTML += `
             <div class="history-item">
               <span><i class="fas fa-shopping-cart"></i> ${item.productName} ${platformIcon}</span>
@@ -999,6 +1051,24 @@
         });
       } catch (err) { console.error(err); }
     }
+
+    // Tìm user theo tên
+    document.getElementById('target-user-name').addEventListener('input', async function() {
+      const name = this.value.trim();
+      const result = document.getElementById('user-search-result');
+      if (!name || name.length < 2) { result.style.display = 'none'; return; }
+      try {
+        const snap = await db.collection('users').where('name', '==', name).get();
+        if (!snap.empty) {
+          const u = snap.docs[0].data();
+          result.style.display = 'block';
+          result.innerHTML = `<span class="found">✅ Tìm thấy: <strong>${u.name}</strong> (${u.email}) - Số dư: ${(u.balance||0).toLocaleString('vi-VN')} VNĐ</span>`;
+        } else {
+          result.style.display = 'block';
+          result.innerHTML = `<span class="not-found">❌ Không tìm thấy "<strong>${name}</strong>"</span>`;
+        }
+      } catch (err) { console.error(err); }
+    });
 
     // Add product (admin)
     document.getElementById('add-product-btn').addEventListener('click', async () => {
@@ -1043,7 +1113,59 @@
       }
     });
 
-    // Buy product - hiển thị thông tin acc
+    // + Tiền cho user (admin)
+    document.getElementById('add-money-btn').addEventListener('click', async () => {
+      const name = document.getElementById('target-user-name').value.trim();
+      const amount = parseInt(document.getElementById('money-amount').value);
+      const result = document.getElementById('user-search-result');
+      
+      if (!name || !amount || isNaN(amount)) {
+        alert('Nhập đầy đủ tên user và số tiền!');
+        return;
+      }
+      
+      try {
+        const q = await db.collection('users').where('name', '==', name).get();
+        if (q.empty) {
+          result.style.display = 'block';
+          result.innerHTML = `<span class="not-found">❌ Không tìm thấy user "<strong>${name}</strong>"</span>`;
+          return;
+        }
+        
+        const userDoc = q.docs[0];
+        const userData = userDoc.data();
+        const newBalance = (userData.balance || 0) + amount;
+        await db.collection('users').doc(userDoc.id).update({ balance: newBalance });
+        
+        result.style.display = 'block';
+        result.innerHTML = `<span class="found">✅ Đã +${amount.toLocaleString('vi-VN')} VNĐ cho <strong>${userData.name}</strong>. Số dư mới: ${newBalance.toLocaleString('vi-VN')} VNĐ</span>`;
+        
+        Swal.fire({
+          icon: 'success',
+          title: '✅ + Tiền thành công!',
+          text: `Đã +${amount.toLocaleString('vi-VN')} VNĐ cho ${userData.name}`,
+          timer: 2000,
+          showConfirmButton: false,
+          background: '#14141F',
+          color: '#FFFFFF'
+        });
+        
+        document.getElementById('target-user-name').value = '';
+        document.getElementById('money-amount').value = '';
+        loadUsers();
+        
+        // Cập nhật UI nếu là user hiện tại
+        if (auth.currentUser && auth.currentUser.email === userData.email) {
+          document.getElementById('top-balance').textContent = newBalance.toLocaleString('vi-VN') + ' VNĐ';
+          document.getElementById('balance-stat').textContent = newBalance.toLocaleString('vi-VN') + ' VNĐ';
+          document.getElementById('user-balance-display').textContent = newBalance.toLocaleString('vi-VN');
+        }
+      } catch (err) {
+        alert('❌ Lỗi: ' + err.message);
+      }
+    });
+
+    // Buy product
     async function buyProduct(product) {
       const user = auth.currentUser;
       if (!user) {
@@ -1066,28 +1188,31 @@
           return;
         }
         
-        // Nếu là acc tích xanh, hiển thị thông tin đăng nhập trước khi mua
+        // Nếu là acc tích xanh, hiển thị thông tin đăng nhập
         if (product.category === 'tich' && product.username && product.password) {
           const platformName = product.platform === 'facebook' ? '📘 Facebook' : '📸 Instagram';
-          const confirm = await Swal.fire({
+          const platformColor = product.platform === 'facebook' ? '#1877F2' : '#E4405F';
+          
+          const result = await Swal.fire({
             title: '📋 Thông tin tài khoản',
             html: `
-              <div style="text-align:left; background:rgba(0,0,0,0.3); border-radius:12px; padding:15px; margin:10px 0;">
-                <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                  <span style="opacity:0.5;">Nền tảng</span>
-                  <span><strong>${platformName}</strong></span>
+              <div style="text-align:left; background:rgba(0,0,0,0.4); border-radius:14px; padding:16px; margin:10px 0;">
+                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06);">
+                  <span style="opacity:0.6; font-size:0.75rem; text-transform:uppercase;">Nền tảng</span>
+                  <span style="font-weight:600; color:${platformColor};">${platformName}</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                  <span style="opacity:0.5;">Tên đăng nhập</span>
-                  <span><strong style="color:#10B981;">${product.username}</strong></span>
+                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06);">
+                  <span style="opacity:0.6; font-size:0.75rem; text-transform:uppercase;">Tên đăng nhập</span>
+                  <span style="font-weight:600; color:#10B981; font-family:monospace;">${product.username}</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; padding:4px 0;">
-                  <span style="opacity:0.5;">Mật khẩu</span>
-                  <span><strong style="color:#F59E0B;">${product.password}</strong></span>
+                <div style="display:flex; justify-content:space-between; padding:8px 0;">
+                  <span style="opacity:0.6; font-size:0.75rem; text-transform:uppercase;">Mật khẩu</span>
+                  <span style="font-weight:600; color:#F59E0B; font-family:monospace;">${product.password}</span>
                 </div>
               </div>
-              <p style="font-size:0.85rem; color:var(--text-secondary);">
-                <i class="fas fa-info-circle"></i> Bạn có chắc muốn mua acc này với giá 
+              <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:8px;">
+                <i class="fas fa-info-circle" style="color:var(--primary-light);"></i> 
+                Bạn có chắc muốn mua acc này với giá 
                 <strong style="color:#F59E0B;">${product.price.toLocaleString('vi-VN')} VNĐ</strong>?
               </p>
             `,
@@ -1097,11 +1222,13 @@
             cancelButtonColor: '#EF4444',
             confirmButtonText: '✅ Mua ngay',
             cancelButtonText: '❌ Hủy',
-            width: 500
+            width: 520,
+            background: '#14141F',
+            color: '#FFFFFF'
           });
-          if (!confirm.isConfirmed) return;
+          if (!result.isConfirmed) return;
         } else {
-          // Sản phẩm dame - xác nhận bình thường
+          // Sản phẩm dame hoặc sài được - xác nhận bình thường
           const confirm = await Swal.fire({
             title: 'Xác nhận mua',
             html: `Bạn muốn mua <strong>${product.name}</strong><br>Giá: <strong style="color:#F59E0B">${product.price.toLocaleString('vi-VN')} VNĐ</strong>?`,
@@ -1110,7 +1237,9 @@
             confirmButtonColor: '#10B981',
             cancelButtonColor: '#EF4444',
             confirmButtonText: '✅ Mua',
-            cancelButtonText: '❌ Hủy'
+            cancelButtonText: '❌ Hủy',
+            background: '#14141F',
+            color: '#FFFFFF'
           });
           if (!confirm.isConfirmed) return;
         }
@@ -1128,13 +1257,12 @@
           category: product.category,
           platform: product.platform || 'none',
           username: product.username || '',
+          password: product.password || '',
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
         
-        // Nếu là acc tích xanh, đánh dấu đã bán và xóa khỏi shop
+        // Nếu là acc tích xanh, xóa khỏi shop
         if (product.category === 'tich' && product.docId) {
-          await db.collection('products').doc(product.docId).update({ isSold: true });
-          // Xóa luôn khỏi danh sách hiển thị
           await db.collection('products').doc(product.docId).delete();
         }
         
@@ -1155,11 +1283,20 @@
           icon: 'success', 
           title: '🎉 Mua thành công!', 
           text: msg,
-          timer: 3000,
-          showConfirmButton: true
+          background: '#14141F',
+          color: '#FFFFFF',
+          confirmButtonColor: '#10B981',
+          timer: 4000
         });
       } catch (err) {
-        Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Thử lại sau', confirmButtonColor: '#EF4444' });
+        Swal.fire({ 
+          icon: 'error', 
+          title: 'Lỗi!', 
+          text: 'Thử lại sau', 
+          confirmButtonColor: '#EF4444',
+          background: '#14141F',
+          color: '#FFFFFF'
+        });
         console.error(err);
       }
     }
@@ -1170,89 +1307,46 @@
         const snap = await db.collection('products').orderBy('createdAt', 'desc').get();
         const dameContainer = document.getElementById('dame-products');
         const tichContainer = document.getElementById('tich-products');
+        const sudungContainer = document.getElementById('sudung-products');
+        
         dameContainer.innerHTML = '';
         tichContainer.innerHTML = '';
+        sudungContainer.innerHTML = '';
 
         if (snap.empty) {
           dameContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm</p></div>';
           tichContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm</p></div>';
+          sudungContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm</p></div>';
           document.getElementById('total-products').textContent = '0';
           return;
         }
 
-        let total = 0, dameCount = 0, tichCount = 0;
+        let total = 0, dameCount = 0, tichCount = 0, sudungCount = 0;
         
         snap.forEach(doc => {
           const data = doc.data();
-          // Bỏ qua acc đã bán
           if (data.isSold === true) return;
           
           total++;
-          const isDame = data.category === 'dame' || data.name.toLowerCase().includes('dame');
-          if (isDame) dameCount++;
-          else tichCount++;
-
-          const card = document.createElement('div');
-          card.className = 'product-card';
+          const category = data.category || 'dame';
           
-          let badgeHtml = '';
-          let iconHtml = '';
-          let platformHtml = '';
-          let loginInfoHtml = '';
-          
-          if (isDame) {
-            badgeHtml = '<span class="category-badge badge-dame">💎 Dame</span>';
-            iconHtml = '👑';
+          if (category === 'dame' || data.name.toLowerCase().includes('dame')) {
+            dameCount++;
+            const card = createProductCard(data, doc.id, 'dame');
+            dameContainer.appendChild(card);
+          } else if (category === 'tich' || data.name.toLowerCase().includes('tích xanh')) {
+            tichCount++;
+            const card = createProductCard(data, doc.id, 'tich');
+            tichContainer.appendChild(card);
+          } else if (category === 'su-dung') {
+            sudungCount++;
+            const card = createProductCard(data, doc.id, 'su-dung');
+            sudungContainer.appendChild(card);
           } else {
-            badgeHtml = '<span class="category-badge badge-tich">✅ Tích Xanh</span>';
-            iconHtml = '⭐';
-            
-            // Hiển thị nền tảng
-            const platformName = data.platform === 'facebook' ? '📘 Facebook' : '📸 Instagram';
-            const platformClass = data.platform === 'facebook' ? 'badge-fb' : 'badge-ig';
-            platformHtml = `<div class="platform"><span class="category-badge ${platformClass}">${platformName}</span></div>`;
-            
-            // Hiển thị thông tin đăng nhập (ẩn 1 phần)
-            if (data.username) {
-              loginInfoHtml = `
-                <div class="login-info">
-                  <span class="label">👤 Tên đăng nhập</span>
-                  <span>${data.username}</span>
-                  <span class="label" style="margin-top:4px;">🔒 Mật khẩu</span>
-                  <span>••••••••</span>
-                  <span style="font-size:0.6rem; opacity:0.4; margin-top:4px; display:block;">
-                    <i class="fas fa-info-circle"></i> Nhấn để xem đầy đủ
-                  </span>
-                </div>
-              `;
-            }
+            dameCount++;
+            const card = createProductCard({...data, category: 'dame'}, doc.id, 'dame');
+            dameContainer.appendChild(card);
           }
-          
-          card.innerHTML = `
-            ${badgeHtml}
-            <span class="product-icon">${iconHtml}</span>
-            <h3>${data.name}</h3>
-            ${platformHtml}
-            ${loginInfoHtml}
-            <span class="price">${data.price.toLocaleString('vi-VN')} VNĐ</span>
-            <div class="buy-hint"><i class="fas fa-tap"></i> Nhấn để mua</div>
-          `;
-          
-          // Lưu docId để xóa sau khi mua
-          const productData = { 
-            name: data.name, 
-            price: data.price, 
-            category: data.category || (isDame ? 'dame' : 'tich'),
-            docId: doc.id,
-            username: data.username || '',
-            password: data.password || '',
-            platform: data.platform || 'facebook'
-          };
-          
-          card.onclick = () => buyProduct(productData);
-          
-          if (isDame) dameContainer.appendChild(card);
-          else tichContainer.appendChild(card);
         });
 
         if (!dameContainer.children.length) {
@@ -1261,6 +1355,9 @@
         if (!tichContainer.children.length) {
           tichContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm Tích Xanh</p></div>';
         }
+        if (!sudungContainer.children.length) {
+          sudungContainer.innerHTML = '<div class="empty-products"><i class="fas fa-box-open"></i><p>Chưa có sản phẩm Sài Được</p></div>';
+        }
 
         document.getElementById('total-products').textContent = total;
         document.getElementById('dame-fb').textContent = dameCount;
@@ -1268,6 +1365,72 @@
       } catch (err) {
         console.error('Lỗi load sản phẩm:', err);
       }
+    }
+
+    function createProductCard(data, docId, category) {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      
+      let badgeHtml = '';
+      let iconHtml = '';
+      let platformHtml = '';
+      let loginInfoHtml = '';
+      
+      if (category === 'dame') {
+        badgeHtml = '<span class="category-badge badge-dame">💎 Dame</span>';
+        iconHtml = '👑';
+      } else if (category === 'tich') {
+        badgeHtml = '<span class="category-badge badge-tich">✅ Tích Xanh</span>';
+        iconHtml = '⭐';
+        
+        const platformName = data.platform === 'facebook' ? '📘 Facebook' : '📸 Instagram';
+        const platformClass = data.platform === 'facebook' ? 'badge-fb' : 'badge-ig';
+        platformHtml = `<div class="platform"><span class="category-badge ${platformClass}">${platformName}</span></div>`;
+        
+        if (data.username) {
+          loginInfoHtml = `
+            <div class="login-info">
+              <div class="row">
+                <span class="label">👤 Tên đăng nhập</span>
+                <span class="value" style="color:#10B981;">${data.username}</span>
+              </div>
+              <div class="row">
+                <span class="label">🔒 Mật khẩu</span>
+                <span class="value" style="color:#F59E0B;">••••••••</span>
+              </div>
+              <div style="font-size:0.6rem; opacity:0.4; margin-top:6px; text-align:center;">
+                <i class="fas fa-info-circle"></i> Nhấn để xem đầy đủ
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        badgeHtml = '<span class="category-badge badge-sd">🛠️ Sài Được</span>';
+        iconHtml = '🔧';
+      }
+      
+      card.innerHTML = `
+        ${badgeHtml}
+        <span class="product-icon">${iconHtml}</span>
+        <h3>${data.name}</h3>
+        ${platformHtml}
+        ${loginInfoHtml}
+        <span class="price">${data.price.toLocaleString('vi-VN')} VNĐ</span>
+        <div class="buy-hint"><i class="fas fa-tap"></i> Nhấn để mua</div>
+      `;
+      
+      const productData = { 
+        name: data.name, 
+        price: data.price, 
+        category: category,
+        docId: docId,
+        username: data.username || '',
+        password: data.password || '',
+        platform: data.platform || 'facebook'
+      };
+      
+      card.onclick = () => buyProduct(productData);
+      return card;
     }
 
     loadProducts();
