@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>🔥 DVS Shop - Quản Lý Dịch Vụ</title>
+  <title>🔥 LeThang Shop - Quản Lý Dịch Vụ</title>
   <!-- Import Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -131,12 +131,18 @@
     }
 
     .header-cool h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 900;
       background: linear-gradient(135deg, #ff6b9d, #45aaf2, #2dda7d, #ffd32a, #a55eea);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+    }
+
+    .header-cool p {
+      margin-top: 10px;
+      opacity: 0.8;
+      font-size: 1rem;
     }
 
     /* Dashboard Cards */
@@ -164,7 +170,7 @@
     }
 
     .stat-card h3 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       margin-bottom: 8px;
       background: linear-gradient(135deg, #ffd966, #ffb347);
       -webkit-background-clip: text;
@@ -193,6 +199,7 @@
       text-align: center;
       transition: 0.3s ease;
       backdrop-filter: blur(5px);
+      cursor: pointer;
     }
 
     .product-card:hover {
@@ -202,7 +209,7 @@
     }
 
     .product-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       margin-bottom: 12px;
       color: #fff;
     }
@@ -210,7 +217,7 @@
     .product-card .price {
       color: #ffd700;
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       display: block;
       background: rgba(0, 0, 0, 0.3);
       padding: 8px;
@@ -263,8 +270,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
       justify-content: center;
       align-items: center;
       z-index: 10000;
@@ -274,7 +281,7 @@
       background: linear-gradient(145deg, #1f1f35, #16162a);
       border-radius: 32px;
       width: 90%;
-      max-width: 500px;
+      max-width: 520px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
       overflow: hidden;
@@ -292,7 +299,6 @@
       }
     }
 
-    /* Header Modal với nút X đẹp */
     .modal-header {
       display: flex;
       justify-content: space-between;
@@ -303,7 +309,7 @@
     }
 
     .modal-header h2 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       background: linear-gradient(135deg, #ffd966, #ffaa44);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -341,7 +347,6 @@
       overflow-y: auto;
     }
 
-    /* Scrollbar đẹp */
     .modal-body::-webkit-scrollbar {
       width: 6px;
     }
@@ -356,7 +361,6 @@
       border-radius: 10px;
     }
 
-    /* Auth Switch Buttons */
     .auth-switch {
       display: flex;
       gap: 12px;
@@ -402,6 +406,23 @@
       box-shadow: 0 0 0 3px rgba(69, 170, 242, 0.2);
     }
 
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #aaa;
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+    }
+
     .btn-primary {
       width: 100%;
       padding: 12px;
@@ -429,7 +450,7 @@
 
     .admin-section h3 {
       color: #ffbf69;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
@@ -486,6 +507,24 @@
       font-size: 0.85rem;
       color: #a0e0ff;
     }
+
+    .error-msg {
+      color: #ff8888;
+    }
+
+    .success-msg {
+      color: #88ff88;
+    }
+
+    .info-text {
+      background: rgba(69, 170, 242, 0.1);
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      margin: 10px 0;
+      text-align: center;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -493,13 +532,12 @@
 <!-- RAINBOW MENU -->
 <nav class="rainbow-nav">
   <div class="rainbow-menu">
-    <button class="menu-item" onclick="alert('🚀 Chức năng đang phát triển')"><i class="fas fa-box"></i> SP</button>
-    <button class="menu-item" onclick="alert('🚀 Chức năng đang phát triển')"><i class="fas fa-plus-circle"></i> THÊM</button>
-    <button class="menu-item" onclick="alert('🚀 Chức năng đang phát triển')"><i class="fas fa-folder"></i> MỤC</button>
-    <button class="menu-item" onclick="alert('🚀 Chức năng đang phát triển')"><i class="fas fa-coins"></i> NHẬP</button>
-    <button class="menu-item" onclick="alert('🚀 Chức năng đang phát triển')"><i class="fas fa-money-bill-wave"></i> NẠP</button>
-    <button class="menu-item" onclick="alert('🚀 Chức năng đang phát triển')"><i class="fas fa-hashtag"></i> SỐ</button>
-    <button class="menu-item" id="support-menu-item"><i class="fas fa-headset"></i> HỖ TRỢ</button>
+    <button class="menu-item" onclick="alert('🚀 Tính năng đang phát triển')"><i class="fas fa-box"></i> SP</button>
+    <button class="menu-item" onclick="alert('🚀 Tính năng đang phát triển')"><i class="fas fa-plus-circle"></i> THÊM</button>
+    <button class="menu-item" onclick="alert('🚀 Tính năng đang phát triển')"><i class="fas fa-folder"></i> MỤC</button>
+    <button class="menu-item" onclick="alert('🚀 Tính năng đang phát triển')"><i class="fas fa-coins"></i> NHẬP</button>
+    <button class="menu-item" onclick="alert('🚀 Tính năng đang phát triển')"><i class="fas fa-money-bill-wave"></i> NẠP</button>
+    <button class="menu-item" onclick="alert('🚀 Tính năng đang phát triển')"><i class="fas fa-hashtag"></i> SỐ</button>
     <button class="menu-item" id="admin-menu-btn"><i class="fas fa-bolt"></i> ADMIN</button>
     <div class="balance-display">
       <span class="coin">🪙</span>
@@ -510,8 +548,8 @@
 
 <div class="container">
   <div class="header-cool">
-    <h1>🔥 DVS SHOP</h1>
-    <p style="margin-top: 10px; opacity:0.8;">Dịch vụ uy tín - Giao dịch an toàn</p>
+    <h1>🔥 LeThang Shop</h1>
+    <p><i class="fas fa-crown"></i> Dịch vụ uy tín số 1 - Giao dịch an toàn & bảo mật</p>
   </div>
 
   <!-- Dashboard Stats -->
@@ -522,7 +560,7 @@
     <div class="stat-card"><h3 id="balance-stat">0 VNĐ</h3><p>🪙 SỐ DƯ CỦA BẠN</p></div>
   </div>
 
-  <h2 style="color:#45aaf2; margin-bottom:15px;"><i class="fas fa-store"></i> Sản phẩm nổi bật</h2>
+  <h2 style="color:#45aaf2; margin-bottom:15px;"><i class="fas fa-store"></i> Danh sách sản phẩm</h2>
   <div class="products-grid" id="products-container"></div>
 
   <!-- Support -->
@@ -532,7 +570,7 @@
   </div>
 </div>
 
-<!-- MODAL ADMIN MỚI ĐẸP -->
+<!-- MODAL ADMIN -->
 <div class="modal" id="admin-modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -548,39 +586,60 @@
         </div>
         <div id="login-form">
           <input type="email" id="login-email" placeholder="📧 Email của bạn">
-          <input type="password" id="login-pass" placeholder="🔒 Mật khẩu">
+          <div class="password-wrapper">
+            <input type="password" id="login-pass" placeholder="🔒 Mật khẩu">
+            <button type="button" class="toggle-password" onclick="togglePassword('login-pass', this)"><i class="far fa-eye"></i></button>
+          </div>
           <button class="btn-primary" id="login-btn">Đăng nhập</button>
         </div>
         <div id="register-form" class="hidden">
           <input type="text" id="reg-name" placeholder="👤 Tên hiển thị">
           <input type="email" id="reg-email" placeholder="📧 Email">
-          <input type="password" id="reg-pass" placeholder="🔒 Mật khẩu">
+          <div class="password-wrapper">
+            <input type="password" id="reg-pass" placeholder="🔒 Mật khẩu">
+            <button type="button" class="toggle-password" onclick="togglePassword('reg-pass', this)"><i class="far fa-eye"></i></button>
+          </div>
           <button class="btn-primary" id="register-btn">Tạo tài khoản</button>
         </div>
         <p id="auth-msg" class="auth-msg"></p>
       </div>
 
-      <!-- Admin Panel -->
+      <!-- Admin Panel (Chỉ hiện khi đăng nhập và là admin) -->
       <div id="admin-panel" class="hidden">
-        <p style="text-align:center; margin-bottom: 15px;"><i class="fas fa-crown" style="color:#ffd966;"></i> Xin chào, <strong id="admin-name">Admin</strong> ✨</p>
+        <p style="text-align:center; margin-bottom: 15px;"><i class="fas fa-crown" style="color:#ffd966;"></i> <strong id="admin-name">User</strong> 
+        <span id="admin-badge" class="info-text" style="display: inline-block; margin-left: 8px;"></span></p>
         
+        <!-- Phần dành cho tất cả user đã đăng nhập -->
         <div class="admin-section">
-          <h3><i class="fas fa-plus-circle"></i> Thêm sản phẩm (Admin)</h3>
-          <input type="text" id="product-name" placeholder="Tên sản phẩm (VD: Tích xanh)">
-          <input type="number" id="product-price" placeholder="Giá VNĐ">
-          <button class="btn-primary" id="add-product-btn"><i class="fas fa-cloud-upload-alt"></i> Thêm sản phẩm</button>
+          <h3><i class="fas fa-user-circle"></i> Thông tin tài khoản</h3>
+          <p style="background: #0f0f1a; padding: 10px; border-radius: 12px;">💰 Số dư: <strong style="color:#ffd700;" id="modal-balance">0 VNĐ</strong></p>
         </div>
 
-        <div class="admin-section">
-          <h3><i class="fas fa-coins"></i> Nạp tiền cho user</h3>
-          <input type="email" id="target-user-email" placeholder="📧 Email user">
-          <input type="number" id="money-amount" placeholder="💰 Số tiền VNĐ">
-          <button class="btn-primary" id="add-money-btn"><i class="fas fa-plus-circle"></i> Cộng tiền</button>
+        <!-- Phần chỉ dành cho ADMIN (email admin@lethang.com) -->
+        <div id="admin-only-section" class="hidden">
+          <div class="admin-section">
+            <h3><i class="fas fa-plus-circle"></i> Thêm sản phẩm (Admin)</h3>
+            <input type="text" id="product-name" placeholder="Tên sản phẩm (VD: Tích xanh)">
+            <input type="number" id="product-price" placeholder="Giá VNĐ">
+            <button class="btn-primary" id="add-product-btn"><i class="fas fa-cloud-upload-alt"></i> Thêm sản phẩm</button>
+          </div>
+
+          <div class="admin-section">
+            <h3><i class="fas fa-coins"></i> Nạp tiền cho user (Admin)</h3>
+            <input type="email" id="target-user-email" placeholder="📧 Email user cần nạp">
+            <input type="number" id="money-amount" placeholder="💰 Số tiền VNĐ">
+            <button class="btn-primary" id="add-money-btn"><i class="fas fa-plus-circle"></i> Cộng tiền</button>
+          </div>
+
+          <div class="admin-section">
+            <h3><i class="fas fa-users"></i> Danh sách người dùng</h3>
+            <div id="user-list" class="user-list-box">📋 Đang tải...</div>
+          </div>
         </div>
 
-        <div class="admin-section">
-          <h3><i class="fas fa-users"></i> Danh sách người dùng</h3>
-          <div id="user-list" class="user-list-box">📋 Đang tải danh sách...</div>
+        <!-- Hiển thị cho user thường thấy thông báo -->
+        <div id="user-only-info" class="info-text" style="margin-top: 15px;">
+          <i class="fas fa-lock"></i> Bạn đang ở chế độ người dùng. Chỉ Admin mới có quyền thêm sản phẩm và nạp tiền.
         </div>
 
         <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
@@ -604,6 +663,9 @@
   const auth = firebase.auth();
   const db = firebase.firestore();
 
+  // Email admin cố định
+  const ADMIN_EMAIL = "admin@lethang.com";
+
   // DOM elements
   const modal = document.getElementById('admin-modal');
   const openModalBtn = document.getElementById('admin-menu-btn');
@@ -614,6 +676,8 @@
   const registerFormDiv = document.getElementById('register-form');
   const switchLogin = document.getElementById('switch-to-login');
   const switchRegister = document.getElementById('switch-to-register');
+  const adminOnlySection = document.getElementById('admin-only-section');
+  const userOnlyInfo = document.getElementById('user-only-info');
 
   // Mở/Đóng modal
   openModalBtn.addEventListener('click', () => modal.style.display = 'flex');
@@ -636,21 +700,40 @@
   });
   switchLogin.classList.add('active-toggle');
 
+  // Toggle password
+  window.togglePassword = function(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === "password") {
+      input.type = "text";
+      btn.innerHTML = '<i class="far fa-eye-slash"></i>';
+    } else {
+      input.type = "password";
+      btn.innerHTML = '<i class="far fa-eye"></i>';
+    }
+  };
+
   // Register
   document.getElementById('register-btn').addEventListener('click', () => {
     const name = document.getElementById('reg-name').value.trim();
     const email = document.getElementById('reg-email').value.trim();
     const pass = document.getElementById('reg-pass').value;
     if (!name || !email || !pass) return alert('Vui lòng nhập đầy đủ thông tin!');
+    if (pass.length < 6) return alert('Mật khẩu phải có ít nhất 6 ký tự!');
+    
     auth.createUserWithEmailAndPassword(email, pass)
-      .then(cred => db.collection('users').doc(cred.user.uid).set({ name, email, balance: 0 }))
+      .then(cred => db.collection('users').doc(cred.user.uid).set({ name, email, balance: 0, role: email === ADMIN_EMAIL ? 'admin' : 'user' }))
       .then(() => {
-        document.getElementById('auth-msg').innerText = "✅ Tạo tài khoản thành công! Hãy đăng nhập.";
+        document.getElementById('auth-msg').innerHTML = '<span class="success-msg">✅ Tạo tài khoản thành công! Hãy đăng nhập.</span>';
         setTimeout(() => {
           switchLogin.click();
+          document.getElementById('auth-msg').innerHTML = '';
         }, 1500);
       })
-      .catch(err => alert("Lỗi: " + err.message));
+      .catch(err => {
+        let errorMsg = err.message;
+        if (err.code === 'auth/email-already-in-use') errorMsg = 'Email này đã được đăng ký!';
+        document.getElementById('auth-msg').innerHTML = `<span class="error-msg">❌ ${errorMsg}</span>`;
+      });
   });
 
   // Login
@@ -659,13 +742,15 @@
     const pass = document.getElementById('login-pass').value;
     auth.signInWithEmailAndPassword(email, pass)
       .then(() => {
-        document.getElementById('auth-msg').innerText = "🎉 Đăng nhập thành công!";
+        document.getElementById('auth-msg').innerHTML = '<span class="success-msg">🎉 Đăng nhập thành công!</span>';
         setTimeout(() => {
           authDiv.classList.add('hidden');
           adminPanelDiv.classList.remove('hidden');
         }, 600);
       })
-      .catch(err => alert("Sai email/mật khẩu: " + err.message));
+      .catch(err => {
+        document.getElementById('auth-msg').innerHTML = `<span class="error-msg">❌ Sai email hoặc mật khẩu!</span>`;
+      });
   });
 
   // Auth state
@@ -674,19 +759,33 @@
       const doc = await db.collection('users').doc(user.uid).get();
       if (doc.exists) {
         const data = doc.data();
+        const isAdmin = data.email === ADMIN_EMAIL || data.role === 'admin';
         document.getElementById('admin-name').innerText = data.name || user.email;
-        loadUsers();
-        // Hiển thị số dư lên top balance
-        if (data.balance !== undefined) {
-          document.getElementById('top-balance').innerHTML = data.balance.toLocaleString('vi-VN') + " VNĐ";
-          document.getElementById('balance-stat').innerHTML = data.balance.toLocaleString('vi-VN') + " VNĐ";
+        document.getElementById('modal-balance').innerHTML = (data.balance || 0).toLocaleString('vi-VN') + " VNĐ";
+        
+        if (isAdmin) {
+          adminOnlySection.classList.remove('hidden');
+          userOnlyInfo.classList.add('hidden');
+          document.getElementById('admin-badge').innerHTML = '👑 ADMIN';
+          document.getElementById('admin-badge').style.background = 'linear-gradient(135deg, #ffd966, #ffaa44)';
+          loadUsers();
+        } else {
+          adminOnlySection.classList.add('hidden');
+          userOnlyInfo.classList.remove('hidden');
+          document.getElementById('admin-badge').innerHTML = '👤 Người dùng';
+          document.getElementById('admin-badge').style.background = 'rgba(69, 170, 242, 0.2)';
         }
+        
+        // Cập nhật balance trên header
+        document.getElementById('top-balance').innerHTML = (data.balance || 0).toLocaleString('vi-VN') + " VNĐ";
+        document.getElementById('balance-stat').innerHTML = (data.balance || 0).toLocaleString('vi-VN') + " VNĐ";
       }
     } else {
       authDiv.classList.remove('hidden');
       adminPanelDiv.classList.add('hidden');
       document.getElementById('top-balance').innerHTML = "0 VNĐ";
       document.getElementById('balance-stat').innerHTML = "0 VNĐ";
+      document.getElementById('auth-msg').innerHTML = '';
     }
   });
 
@@ -696,7 +795,7 @@
     closeModal();
   });
 
-  // Load Users
+  // Load Users (Chỉ admin)
   async function loadUsers() {
     const listDiv = document.getElementById('user-list');
     listDiv.innerHTML = "⏳ Đang tải...";
@@ -716,8 +815,8 @@
     });
   }
 
-  // Add product
-  document.getElementById('add-product-btn').addEventListener('click', async () => {
+  // Add product (Chỉ admin mới gọi được vì nút chỉ hiện khi admin)
+  document.getElementById('add-product-btn')?.addEventListener('click', async () => {
     const name = document.getElementById('product-name').value.trim();
     const price = parseInt(document.getElementById('product-price').value);
     if (!name || !price || isNaN(price)) return alert('Nhập tên và giá hợp lệ');
@@ -728,8 +827,8 @@
     loadProducts();
   });
 
-  // Add money
-  document.getElementById('add-money-btn').addEventListener('click', async () => {
+  // Add money (Chỉ admin)
+  document.getElementById('add-money-btn')?.addEventListener('click', async () => {
     const email = document.getElementById('target-user-email').value.trim();
     const amount = parseInt(document.getElementById('money-amount').value);
     if (!email || !amount || isNaN(amount)) return alert('Nhập đúng email và số tiền');
@@ -742,7 +841,8 @@
     document.getElementById('target-user-email').value = '';
     document.getElementById('money-amount').value = '';
     loadUsers();
-    // Cập nhật lại balance của user đang đăng nhập nếu chính là người dùng hiện tại
+    
+    // Cập nhật lại balance nếu nạp cho chính user đang đăng nhập
     const currentUser = auth.currentUser;
     if (currentUser && currentUser.email === email) {
       const updated = await db.collection('users').doc(currentUser.uid).get();
@@ -750,6 +850,7 @@
         const newBal = updated.data().balance || 0;
         document.getElementById('top-balance').innerHTML = newBal.toLocaleString('vi-VN') + " VNĐ";
         document.getElementById('balance-stat').innerHTML = newBal.toLocaleString('vi-VN') + " VNĐ";
+        document.getElementById('modal-balance').innerHTML = newBal.toLocaleString('vi-VN') + " VNĐ";
       }
     }
   });
@@ -785,7 +886,7 @@
 
   loadProducts();
 
-  // Nếu user đã đăng nhập thì load lại balance khi reload
+  // Cập nhật balance realtime
   setInterval(async () => {
     const user = auth.currentUser;
     if (user) {
@@ -794,6 +895,9 @@
         const bal = docRef.data().balance || 0;
         document.getElementById('top-balance').innerHTML = bal.toLocaleString('vi-VN') + " VNĐ";
         document.getElementById('balance-stat').innerHTML = bal.toLocaleString('vi-VN') + " VNĐ";
+        if (document.getElementById('modal-balance')) {
+          document.getElementById('modal-balance').innerHTML = bal.toLocaleString('vi-VN') + " VNĐ";
+        }
       }
     }
   }, 3000);
